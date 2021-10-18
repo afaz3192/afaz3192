@@ -1,0 +1,66 @@
+from turtle import Turtle
+import time
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
+MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+RIGHT = 360
+LEFT = 180
+
+class Snake():
+    def __init__(self):
+
+        self.segment = []
+        self.create_snake()
+        self.head = self.segment[0]
+    def create_snake(self):
+        for number in STARTING_POSITIONS:
+            self_number = Turtle()
+            self_number.shape("square")
+            self_number.color("white")
+
+
+
+            self_number.penup()
+            self_number.goto(number)
+            self.segment.append(self_number)
+    def move(self):
+        # here "self" is the snake object and we are adding an attribute to it.
+        for seg_num in range(len(self.segment) - 1, 0, -1):
+            new_x = self.segment[seg_num - 1].xcor()
+            # according to len(segment) = 3 so when seg_num = 3
+            # segment[seg_num - 1] = segment[2]
+            # segment[2].xcor() will return the x-coordinate of the third piece of the snake.
+            new_y = self.segment[seg_num - 1].ycor()
+            self.segment[seg_num].goto(new_x, new_y)
+        self.head.forward(MOVE_DISTANCE)
+        # self.segment[0].left(ANGLE)
+    def up(self):
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
+    #     self.segment is the head of the snake.
+
+    def down(self):
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
+
+
+    def right(self):
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT)
+
+    def left(self):
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
+
+
+
+
+
+
+
+
+
+
+
+
